@@ -87,7 +87,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 const http = require("http").createServer(app);
 const io = require("socket.io")(http);
 const PORT = process.env.PORT;
-http.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+const HOST = process.env.HOST || '0.0.0.0';
+
+http.listen(PORT, HOST, () => console.log(`Server running on ${HOST}:${PORT}`));
 app.use(express.static(__dirname + "/public"));
 
 const activeUsers = new Set();
